@@ -1,5 +1,8 @@
-require "zonomi/version"
+require 'httparty'
+require 'ostruct'
+
+require_relative "zonomi/version"
+require_relative "zonomi/api"
 
 module Zonomi
-  # Your code goes here...
 end

@@ -1,0 +1,40 @@
+# DNS API Reference
+# Parameter Name; Parameter Alias
+  # Description
+
+# action
+  # One of SET (the default), QUERY or DELETE.
+  # If you set a hostname that does not already exist in a zone, the hostname will be added to that zone.  If you delete a record that does not exist the request will be ignored.
+# host; hostname
+  # The dns record you are updating.
+  # This field is required.
+  # You must have a zone setup on our name servers with this host in it.  e.g. if you have an example.com zone setup you could have host=example.com or host=www.example.com.  This API will not create zones on the fly.  The zone must not be a 'slave' zone on our servers (in which case it is read-only).  You can provide one or more (comma separated) host values.  e.g. if you wanted to set multiple domain names to a single IP addresss. Use **.example.com to match all names ending in example.com.  This can be useful for getting a list of all records in a zone.
+# type
+  # DNS record type.
+  # e.g. A, MX, or TXT.
+  # Defaults to A.
+# value; myip, dnsto
+  # Set this value on the record.
+  # If the record is an IP Address (A) record then the value would need to be an IP address.  If the record were a Mail Server (MX) record then it would need to be a host name.  For an IP Address (A) record this will default to the IP address of the API client (e.g. your home PC, e.g. right now that is 176.52.37.118).  To set multiple values for a single hostname provide a comma separated list of values.  e.g. if you wanted to set multiple IPs for a IP Address (A) record.  The multiple values feature only works with some (e.g. PTR, A, MX, CNAME) record types.
+# prio
+  # The priority.
+  # A number.
+  # Used on MX records.
+  # If not specified the API will set it to 0.  If more than one host name is specified for the action and the priority is not specified then the priority is incremented for each host.
+# ttl
+  # The TTL (time to live) on the record.
+  # Optional (and typically best not provided).
+  # A number.
+  # Used to hint at how long in minutes recursive name servers should cache the record details.  3600 or one hour is a common default.
+# api_key
+  # Your DNS API key.
+  # Keep this secret (like you would a password).
+  # This API key is unique to your user account.
+  # Your API key can be passed in as an api_key=blah parameter. Or it can be passed in as an 'Authorization' header.  The format for the Authorization header is like "Authorization: redrata api_key=ec7....82e137431".  To change your API key (e.g. if someone who should not know it discovers it) use our API keys page.  Your API Key is api_key_hash.
+
+# If you wish to perform more than one action add [number] to each parameter in that action set.  The actions will be performed in numerical order.
+# You can use either the https URL or a plain http URL.  If your dynamic DNS client supports it, we recommend the https URL since then the URL is encrypted.
+# You can use GET (with the parameters in the URL) or POST (with the parameters as form URL encoded values).
+# If the update is successful you will get page a page with one line of text that starts "OK:".  If the update fails you will get back a page with one line of text that starts "ERROR:".
+
+
